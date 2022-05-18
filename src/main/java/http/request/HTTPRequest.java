@@ -114,8 +114,8 @@ public class HTTPRequest {
         return buffer.toString();
     }
 
-    public void call() throws IOException {
-        WebSocket.request(this);
+    public HTTPResponse call() throws IOException {
+        return WebSocket.request(this);
     }
 
     public String toString(){

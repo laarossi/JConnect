@@ -17,10 +17,11 @@ public class WebSocket {
         byte[] bufferO = new byte[1024];
         int read;
         HTTPResponse httpResponse = new HTTPResponse();
+        StringBuilder outputBuffer = new StringBuilder();
         while((read = is.read(bufferO)) != -1) {
-            String output = new String(bufferO, 0, read);
-            httpResponse.parse(output);
+            outputBuffer.append(new String(bufferO, 0, read));
         }
+        httpResponse.parse(outputBuffer.toString());
         return httpResponse;
     }
 
