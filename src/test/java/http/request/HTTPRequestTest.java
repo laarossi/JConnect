@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class RequestBuilderTest {
+class HTTPRequestTest {
 
     private HTTPRequest httpRequest;
 
@@ -19,6 +19,7 @@ class RequestBuilderTest {
                  .content("plain/text")
                  .timeout(50000)
                  .header("HeaderTest", "TestData")
+                 .entity("data")
                  .build();
     }
 
@@ -38,31 +39,14 @@ class RequestBuilderTest {
     }
 
     @Test
-    void header() {
+    void writer(){
+        this.httpRequest.contentWriter = new
     }
 
     @Test
-    void headers() {
-    }
-
-    @Test
-    void cookie() {
-    }
-
-    @Test
-    void cookies() {
-    }
-
-    @Test
-    void content() {
-    }
-
-    @Test
-    void writer() {
-    }
-
-    @Test
-    void timeout() {
+    void print(){
+        String output = this.httpRequest.toString();
+        assert output != null && !output.isEmpty();
     }
 
 }
