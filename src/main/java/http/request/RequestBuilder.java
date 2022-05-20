@@ -68,6 +68,11 @@ public class RequestBuilder {
         return this;
     }
 
+    public RequestBuilder entity(Object entity){
+        this.httpRequest.setEntity(entity);
+        return this;
+    }
+
     public HTTPRequest build(){
         return this.httpRequest;
     }

@@ -14,12 +14,10 @@ public class HTTPResponse {
         rawResponse = data;
         List<String> lines = new LinkedList<>(Arrays.asList(data.split("\n")));
         int i = 0;
-        while (true){
-            if(i == lines.size()) break;
-            if(parseHeader(i, lines)) continue;
+        while (i != lines.size()) {
+            if (parseHeader(i, lines)) continue;
             i++;
         }
-
     }
 
     public boolean parseHeader(int dataRow, List<String> data){
@@ -36,10 +34,10 @@ public class HTTPResponse {
 
     public boolean parseCookie(int dataRow, List<String> data){
         String cookie = data.get(dataRow);
-        Pattern pattern = Pattern.compile("Cookie([ ]*):(?<value>(.*))");
+        Pattern pattern = Pattern.compile("(Cookie|cookie)([ ]*):(?<value>(.*))");
         Matcher matcher = pattern.matcher(cookie);
         if(matcher.find()){
-            headers.put("Cookie", matcher.group("value").trim());
+            cookies.put("Cookie", matcher.group("value").trim());
             data.remove(dataRow);
             return true;
         }
@@ -50,12 +48,8 @@ public class HTTPResponse {
         return headers;
     }
 
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    public String getRawResponse() {
-        return rawResponse;
+    public Map<String, String> getCookies() {
+        return cookies;
     }
 
 }

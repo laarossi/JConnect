@@ -15,13 +15,12 @@ import java.util.Map;
 public class HTTPRequest {
 
     int timeout, port = 80;
-    String httpVersion;
-    String host, path, url;
+    String host, path, url, httpVersion, body, contentType;
     HTTPMethod requestMethod;
     Map<String,String> headers = new HashMap<>();
     Map<String,String> cookies = new HashMap<>();
-    String contentType;
     ContentWriter contentWriter;
+    Object entity;
 
     public HTTPRequest(){}
 
@@ -41,16 +40,8 @@ public class HTTPRequest {
         this.url = url;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
     public String getHost() {
         return host;
-    }
-
-    public String getPath() {
-        return path;
     }
 
     public int getPort() {
@@ -115,7 +106,16 @@ public class HTTPRequest {
     }
 
     public HTTPResponse call() throws IOException {
+        if(entity != null){
+            if(contentWriter == null)
+                body = entity.toString();
+            else body = contentWriter.write(entity);
+        }
         return WebSocket.request(this);
+    }
+
+    public void setEntity(Object entity) {
+        this.entity = entity;
     }
 
     public String toString(){
