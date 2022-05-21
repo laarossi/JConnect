@@ -2,6 +2,7 @@ package http.request;
 
 import exception.NoSuchUrlException;
 import http.HTTPMethod;
+import http.header.cache.Cache;
 import http.response.HTTPResponse;
 import http.socket.WebSocket;
 import io.writer.ContentWriter;
@@ -20,6 +21,7 @@ public class HTTPRequest {
     Map<String,String> headers = new HashMap<>();
     Map<String,String> cookies = new HashMap<>();
     ContentWriter contentWriter;
+    Cache cache = new Cache();
     Object entity;
 
     public HTTPRequest(){}
@@ -84,6 +86,10 @@ public class HTTPRequest {
 
     public void setContentWriter(ContentWriter contentWriter) {
         this.contentWriter = contentWriter;
+    }
+
+    public void setCache(Cache cache) {
+        this.cache = cache;
     }
 
     public String printHeaders(){

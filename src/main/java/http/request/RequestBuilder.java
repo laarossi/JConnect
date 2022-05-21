@@ -2,6 +2,7 @@ package http.request;
 
 import exception.NoSuchUrlException;
 import http.HTTPMethod;
+import http.header.cache.Cache;
 import io.writer.ContentWriter;
 
 import java.util.Map;
@@ -70,6 +71,11 @@ public class RequestBuilder {
 
     public RequestBuilder entity(Object entity){
         this.httpRequest.setEntity(entity);
+        return this;
+    }
+
+    public RequestBuilder cache(Cache cache){
+        this.httpRequest.setCache(cache);
         return this;
     }
 
