@@ -2,7 +2,7 @@ package http.header.cache;
 
 public class CacheBuilder {
 
-    private Cache cache;
+    private Cache cache = new Cache();
 
     public static CacheBuilder cache(){
         return new CacheBuilder();
@@ -39,8 +39,17 @@ public class CacheBuilder {
     }
 
     public CacheBuilder maxAge(int maxAge){
-        cache.maxAge = maxAge;
+        cache.setMaxAge(maxAge);
         return this;
+    }
+
+    public CacheBuilder eTag(String tag){
+        cache.setETag(tag);
+        return this;
+    }
+
+    public Cache build(){
+        return this.cache;
     }
 
 }

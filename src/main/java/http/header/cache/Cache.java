@@ -6,7 +6,7 @@ public class Cache {
 
     int maxAge;
     String ETag;
-    CacheControlType cacheControlType;
+    CacheControlType cacheControlType = CacheControlType.PUBLIC;
 
     enum CacheControlType{
 
@@ -35,5 +35,16 @@ public class Cache {
     public void setETag(String eTag) {
         this.ETag = eTag;
     }
+
+    public String print(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Cache-Control : ");
+        stringBuilder.append(cacheControlType.type);
+        if(maxAge != 0){
+            stringBuilder.append(", ").append("max-age=").append(maxAge);
+        }
+        return stringBuilder.toString();
+    }
+
 }
 
