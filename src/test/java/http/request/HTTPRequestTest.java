@@ -2,6 +2,7 @@ package http.request;
 
 import exception.NoSuchUrlException;
 import http.HTTPMethod;
+import http.header.cache.CacheBuilder;
 import io.writer.ContentWriter;
 import io.writer.JSONContentWriter;
 import org.junit.jupiter.api.BeforeAll;
@@ -33,6 +34,7 @@ class HTTPRequestTest {
                 .cookie("cookie", "cookie1")
                 .headers(headers, true)
                 .cookies(cookies, true)
+                .cache(CacheBuilder.cache().privateCache().maxAge(100).build())
                 .build();
     }
 
@@ -78,6 +80,11 @@ class HTTPRequestTest {
     @Test
     void headers(){
         assert this.httpRequest.headers.size() == 2;
+    }
+
+    @Test
+    void cache(){
+        assert this.httpRequest.cache.print().equals("Cache-Control : private, max-age=100");
     }
 
 }
